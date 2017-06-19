@@ -2,6 +2,8 @@ var mysql = require("mysql");
 
 var inquirer = require("inquirer")
 
+var colors = require("colors");
+
 //establishes connection criteria
 var connection = mysql.createConnection({
   host: "localhost",
@@ -21,19 +23,12 @@ function beginningMenu() {
 
 	console.log("Product:" + " |*| " + "Department:" + " |*| " + "Price:" + " |*| " + "Quantity:");
 
-	// prints the inventory after its grabbed from the db by getInventory
-	function printInventory(res) {
-
-		for (var i = 0; i < res.length; i++) {
-			console.log(res[i].product_name + " |*| " + res[i].department_name + " |*| " + "$" + res[i].price + " |*| " + res[i].stock);
-		}
-		console.log("____________________________________________________________________");
-	}
-
 	// connects with the db using connection.query and then runs printInventory and purchasePrompt
 	function getInventory() {
 
-		connection.query("SELECT * FROM products", function(err, res) {
+		var queryString1 = "SELECT * FROM products";
+
+		connection.query(queryString1, function(err, res) {
 			if(err) {
 				throw err;
 			}
@@ -43,14 +38,22 @@ function beginningMenu() {
 	} 
 	getInventory();	
 
+	// prints the inventory after its grabbed from the db by getInventory
+	function printInventory(res) {
+
+		for (var i = 0; i < res.length; i++) {
+			console.log(res[i].product_name + " |*| " + res[i].department_name + " |*| " + "$" + res[i].price + " |*| " + res[i].stock);
+		}
+		console.log("____________________________________________________________________");
+	}
+
 }// END beginningMenu();
 beginningMenu();
 
 
-
-
 // the answer to this will start the purchase. 
 function purchasePrompt() {
+
 	inquirer.prompt([
 	{
 		type: "input",
@@ -69,19 +72,20 @@ function purchasePrompt() {
 		var itemID = answers.item;	
 		var qty = answers.quantity;
 
-		connection.query("SELECT * FROM products WHERE product_name=?", [itemID], function(err,selectedItem) {
+		var queryString2 = "SELECT * FROM products WHERE product_name=?";
+
+		connection.query(queryString2, [itemID], function(err,data) {
 
 			if (err) {
 				throw err;
 			}
+			console.log(data[0]);
 
-			if(selectedItem[0].StockQuantity - quantity >= 0) {
-				// HERE YOU LEFT OFF //
-			}
+			
+
 		})
-
 	})
-}
+}// END purchasePrompt()
 
 
 
