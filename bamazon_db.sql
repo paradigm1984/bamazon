@@ -21,7 +21,7 @@ INSERT INTO products(id, product_name, department_name, price, stock)
 VALUES (3, "IQ84", "Books", 10.99, 26);
 
 INSERT INTO products(id, product_name, department_name, price, stock)
-VALUES (4, "Water: 24 pk", "Pantry", 4.99, 50);
+VALUES (4, "Water", "Pantry", 4.99, 50);
 
 INSERT INTO products(id, product_name, department_name, price, stock)
 VALUES (5, "Dad Hat", "Clothing", 17.99, 30);
@@ -39,4 +39,4 @@ INSERT INTO products(id, product_name, department_name, price, stock)
 VALUES (9, "Skinny Jeans", "Clothing", 29.99, 60);
 
 INSERT INTO products(id, product_name, department_name, price, stock)
-VALUES (10, "Tylenol: 100 ct.", "Medicine", 5.99, 85);
+VALUES (10, "Tylenol", "Medicine", 5.99, 85);
